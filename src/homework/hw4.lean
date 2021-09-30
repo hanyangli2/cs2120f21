@@ -60,7 +60,40 @@ end
 -- 5
 theorem demorgan_1 : ∀ (P Q : Prop), ¬ (P ∧ Q) ↔ ¬ P ∨ ¬ Q :=
 begin
-end
+  assume P Q,
+  apply iff.intro _ _,
+
+  assume h,
+  have p := em P,
+  have q := em Q,
+  cases p,
+  cases q,
+  
+  have pandq := and.intro p q,
+  contradiction,
+
+  apply or.intro_right,
+  exact q,
+
+  apply or.intro_left,
+  exact p,
+
+  assume npornq,
+
+  assume h,
+  apply and.elim h,
+
+  assume p,
+  assume q,
+
+  cases npornq,  
+
+  contradiction,
+
+  contradiction,
+
+  
+end 
 
 
 -- 6
@@ -73,6 +106,20 @@ end
 theorem disappearing_opposite : 
   ∀ (P Q : Prop), P ∨ ¬P ∧ Q ↔ P ∨ Q := 
 begin
+  assume P Q, 
+  apply iff.intro _ _,
+  
+  assume h,
+  cases h with p npq,
+
+  apply or.intro_left,
+  exact p,
+
+  have pfQ := and.elim_right npq,
+  apply or.intro_right,
+  exact pfQ,
+
+
 end
 
 
@@ -81,6 +128,15 @@ theorem distrib_and_or :
   ∀ (P Q R: Prop), (P ∨ Q) ∧ (P ∨ R) ↔
                     P ∨ (Q ∧ R) :=
 begin
+  assume P Q R,
+  apply iff.intro _ _,
+
+  assume h,
+  cases h,
+  
+
+
+  
 end
 
 -- remember or is right associative
@@ -115,5 +171,6 @@ end
 -- 13
 example : ∀ (P Q : Prop), ( ¬P → ¬Q) → (Q → P) :=
 begin
+  assume P Q,
 end
 

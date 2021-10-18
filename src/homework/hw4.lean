@@ -4,7 +4,7 @@ begin
   -- ¬ (0 = 1)
   -- (0 = 1) → false
   assume h,
-  cases h,
+  trivial,
 end
 
 
@@ -12,7 +12,12 @@ end
 example : 0 ≠ 0 → 2 = 3 :=
 begin
   assume h,
+<<<<<<< HEAD
   have f := h (eq.refl 0),
+=======
+  have zeqz := eq.refl 0,
+  have f : false := h zeqz,
+>>>>>>> 0aa273ab3e446ab78162154409146620152e281e
   exact false.elim (f),
 end
 
@@ -58,6 +63,7 @@ end
 theorem demorgan_1 : ∀ (P Q : Prop), ¬ (P ∧ Q) ↔ ¬ P ∨ ¬ Q :=
 begin
   assume P Q,
+<<<<<<< HEAD
   apply iff.intro _ _,
 
   assume h,
@@ -89,13 +95,28 @@ begin
 
   contradiction,
 end 
+=======
+  split,
+  -- forward
+  assume h,
+  cases (classical.em P) with p np,
+  cases (classical.em Q) with q nq,
+  have pq := and.intro p q,
+  contradiction,
+  exact or.inr nq,
+  exact or.inl np,
+  -- backward
+  admit,
+end
+>>>>>>> 0aa273ab3e446ab78162154409146620152e281e
 
 
 -- 6
-theorem demorgan_2 : ∀ (P Q : Prop), ¬ (P ∨ Q) → ¬P ∧ ¬Q :=
+theorem demorgan_2 : ∀ (P Q : Prop), ¬ (P ∨ Q) → (¬P ∧ ¬Q) :=
 begin
   assume P Q,
   assume h,
+<<<<<<< HEAD
 
   have pornp := em P,
   have qornq := em Q,
@@ -108,6 +129,15 @@ begin
 
 
   --why does contradiction not work here?
+=======
+  cases (classical.em P) with p np,
+  cases (classical.em Q) with q nq,
+  have porq := or.intro_left Q p,
+  contradiction,
+  have porq := or.intro_left Q p,
+  contradiction,
+  cases (classical.em Q) with q nq,
+>>>>>>> 0aa273ab3e446ab78162154409146620152e281e
 
 end
 
@@ -372,3 +402,8 @@ begin
   contradiction,
 end
 
+
+
+axioms (T : Type) (Q : Prop) (f : ∀ (t : T), Q) (t : T)
+example : Q := f t
+#check f

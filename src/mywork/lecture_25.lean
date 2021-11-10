@@ -28,6 +28,17 @@ def partial_order :=    reflexive r ∧ transitive r ∧ anti_symmetric r ∧ ¬
 
 def total_order :=      reflexive r ∧ transitive r ∧ anti_symmetric r ∧ strongly_connected r
 
+
+
+--well order
+def well_ordering := total_order r ∧ 
+  (
+    ∀ (s : set β),
+    ∃ (b : β), 
+      (∀ (b' : β), b' ∈ s → b ≺ b')
+  )
+
+
 /-
 OPERATIONS ON BINARY RELATIONS
 

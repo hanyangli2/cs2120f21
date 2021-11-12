@@ -48,7 +48,6 @@ begin
   have rbb := refl b_w,
   have nrbb := assym rbb,
   contradiction,
-
 end
 
 

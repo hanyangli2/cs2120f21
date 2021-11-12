@@ -266,17 +266,30 @@ the first step is to unfold transitive and divides.
 
 After this, we assume all values of type ℕ as well as
 two of the transitive propisitions. 
+
+We apply cases to both the propisitions to show that
+there are values that exist for these propisitions. 
+
+After this, we subsitute n in b_h with the 
+our proof of a_h, which states that:
+
+n = a_w * h. 
+
+With our new proof of b_h, we can state that 
+there exists a value k of b_w * a_w. 
+
+This matches with the proof we need to prove. 
+
 -/
 
 /- 
 E. Is divides symmetric? if yes, give a proof, otherwise 
 give a counterexample and a brief explanation to show that 
-it's not.
+it's not. 
 
-Divides is not symmetric. 
+divides is not symmetric because a/b is not the same as b/a.
 
 -/
-
 
 
 /- 
@@ -285,15 +298,26 @@ Divides is not symmetric.
 example : anti_symmetric divides := 
 begin
   unfold anti_symmetric divides,
-  assume h,
-  assume z,
-  assume f,
-  assume j,
-  cases f,
-  cases j,
-
-    
+  assume x,
+  assume y,
+  assume a,
+  assume b,
+  cases a,
+  cases b,
+  rw a_h,
+  have z : a_w = 1 := sorry,
+  rw z,
+  ring,
 end
+
+/-
+In order to prove that divides is anti_symmetric, we first
+need to unfold the definitions of anti_symmetric and
+divides. 
+
+
+
+-/
 
 
 /- #4
@@ -330,6 +354,8 @@ end
 -- C
 example : transitive r → ¬ symmetric r → ¬ irreflexive r :=
 begin
+  unfold transitive symmetric irreflexive,
+  assume a b c,
 end
 
 

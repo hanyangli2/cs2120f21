@@ -140,6 +140,27 @@ begin
   exact pf,
 end
 
+/-
+In order to prove that if s1 is a subset of s2 and
+s2 is a subset of s1, then they are equivalent,
+the first step is to assume the sets, the propisition that
+they are both under the powerset s, and that they are subsets 
+of one another. 
+
+We then apply set.ext to transform the = into ↔. 
+
+From here, we assume that there exists a value x and
+then split it into forwards and backwards. 
+
+First we assume that x is in s1 and feed it into the 
+proof that s1 is a subset of s2. This finishes the forwards proof. 
+
+The backwards proof is the same principle just with s2 rather
+than s1.
+
+
+-/
+
 
 /-
 Given two natural numbers, n and m, we will say that m divides n
@@ -315,8 +336,19 @@ In order to prove that divides is anti_symmetric, we first
 need to unfold the definitions of anti_symmetric and
 divides. 
 
+We then assume all values of type ℕ and the two propisitions. 
 
+We then apply cases on the two propisitions to show that there
+exists a value k of type ℕ. 
 
+We then rewrite the proof we currently we have with 
+the proof of our definition of y = a_w * x. 
+
+From here, we can assume that there exists a value a_w of
+1. 
+
+With this, we have the proof that a_w = 1 * a_w, which we can just
+assume to be true.
 -/
 
 
@@ -333,23 +365,52 @@ problems.
 example : asymmetric r → irreflexive r :=
 begin
   unfold asymmetric irreflexive,
-  assume h x k,
-  have nk := h k,
+  assume h,
+  assume a,
+  assume b,
+  have notb := h b,
   contradiction,
 end
+
+/-
+In order to prove that if r is asymmetric, then r is 
+irreflexive, the first step is to unfold the
+definitions of assymetric and irreflexive. 
+
+Once unfolded, we assume the propisition
+that for all values, r x y → ¬ r y x 
+as well as r x x being true (b). 
+
+We then feed b into our propisition,
+which returns the value ¬ r x x in
+order to create a contradiction. 
+-/
 
 -- B
 example : irreflexive r → transitive r → asymmetric r :=
 begin
-  unfold irreflexive transitive,
-  assume h k,
-  assume x y,
-  assume rxy,
-  assume nryx,
-  have f := k rxy nryx,
-  have nrxx := h x,
+  unfold irreflexive transitive asymmetric,
+  intros,
+  assume ryx,
+  have h := ᾰ_1 ᾰ_2 ryx,
+  have notraa := ᾰ x,
   contradiction,
 end
+
+/-
+In order to prove the irreflexive implies transitive implies asymmetric,
+the first step is to unfold all values.
+
+We then assume all values. This includes the propisitions,
+the values of type β, and the proofs of ryx and rxy. 
+
+We first feed ryx and rxy into the transitive property, returing 
+rxx. 
+
+We then feed rxx into irreflexive, which returns ¬rxx. 
+
+This creates a contradiction.
+-/
 
 -- C
 example : transitive r → ¬ symmetric r → ¬ irreflexive r :=
@@ -358,5 +419,8 @@ begin
   assume a b c,
 end
 
+/-
+This one is not solvable. 
+-/
 
 end relation
